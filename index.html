@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Habibur Rahman | SOC Analyst Portfolio</title>
+    <meta name="description" content="Cybersecurity Portfolio of Mohammed Habibur Rahman - SOC Analyst, Digital Forensics, and Security Researcher.">
+    
+    <!-- Google Fonts: Share Tech Mono for that Terminal Vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <canvas id="matrix-canvas"></canvas>
+    <div class="scanlines"></div>
+
+    <!-- Navigation -->
+    <nav aria-label="main navigation">
+        <a href="#" class="logo">AINZ</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button class="hamburger" aria-expanded="false" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="glitch-wrapper">
+            <h1 class="glitch" data-text="Mohammed Habibur Rahman">Mohammed Habibur Rahman</h1>
+        </div>
+        <div class="tagline">
+            <span id="typewriter"></span><span class="cursor">|</span>
+        </div>
+        <div class="cta-buttons">
+            <a href="resume.pdf" class="btn" download><i class="fas fa-file-download"></i> Download Resume</a>
+            <a href="#projects" class="btn"><i class="fas fa-terminal"></i> View Projects</a>
+            <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Contact Me</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">01. About Me <span>// whoami</span></h2>
+        <div class="about-content">
+            <div class="bio-text">
+                <p>
+                    <span class="highlight">root@ainz:~#</span> I am a dedicated Cybersecurity enthusiast and aspiring SOC Analyst with a strong foundation in Digital Forensics and Incident Response.
+                </p>
+                <p>
+                    My objective is to leverage my skills in SIEM (Splunk), network analysis, and ethical hacking to detect threats and defend critical infrastructure. I bridge the gap between offensive knowledge and defensive strategy.
+                </p>
+                <p>
+                    Currently focusing on <span class="cyan">Blue Team operations</span>, automating threat detection, and climbing the ranks in global CTF competitions.
+                </p>
+            </div>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red-dot"></div>
+                    <div class="dot yellow-dot"></div>
+                    <div class="dot green-dot"></div>
+                </div>
+                <div class="terminal-body">
+                    <p>> Ainz.location</p>
+                    <p class="highlight">"India"</p>
+                    <br>
+                    <p>> Ainz.interests</p>
+                    <p class="highlight">["SOC", "Malware Analysis", "CTF", "Python"]</p>
+                    <br>
+                    <p>> Ainz.status</p>
+                    <p class="highlight">"Ready for Internship"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">02. Skills Matrix <span>// tools & arsenal</span></h2>
+        <div class="skills-grid">
+            <!-- Security Tools -->
+            <div class="skill-card">
+                <h3><i class="fas fa-shield-alt"></i> Security Operations</h3>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Splunk / SIEM</span><span>90%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Wireshark / PCAP</span><span>85%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Burp Suite</span><span>75%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 75%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Nmap / Recon</span><span>95%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 95%"></div></div>
+                </div>
+            </div>
+
+            <!-- Programming -->
+            <div class="skill-card">
+                <h3><i class="fas fa-code"></i> Scripting & Code</h3>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Python</span><span>85%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Bash / Shell</span><span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 80%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>SQL</span><span>70%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 70%"></div></div>
+                </div>
+            </div>
+
+            <!-- Infrastructure -->
+            <div class="skill-card">
+                <h3><i class="fas fa-server"></i> Infra & Cloud</h3>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Linux (Kali/Ubuntu)</span><span>90%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>Docker</span><span>65%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 65%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name"><span>AWS Basics</span><span>60%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 60%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">03. Experience <span>// /var/log/career</span></h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Apr 2025 – Jul 2025</div>
+                <div class="timeline-role">Cybersecurity & Digital Forensics Intern</div>
+                <div class="timeline-company">Cyber Secured India</div>
+                <ul class="timeline-desc">
+                    <li>Analyzed 500+ security logs using SIEM tools to identify potential threats.</li>
+                    <li>Conducted digital forensics investigations on compromised endpoints.</li>
+                    <li>Assisted in vulnerability assessments and reporting for client networks.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jul 2023 – May 2025</div>
+                <div class="timeline-role">Freelance IT Support Technician</div>
+                <div class="timeline-company">Self-Employed</div>
+                <ul class="timeline-desc">
+                    <li>Resolved hardware and software issues for 50+ local clients.</li>
+                    <li>Implemented basic firewall rules and malware protection for small businesses.</li>
+                    <li>Managed data recovery operations and system optimizations.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">04. Featured Projects <span>// ./execute</span></h2>
+        <div class="project-grid">
+            <!-- Project 3 -->
+            <div class="project-card">
+                <h3>Object Detection System</h3>
+                <p>Developed a real-time object detection system capable of identifying and classifying objects in video streams and images.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">OpenCV</span>
+                    <span class="tech-badge">TensorFlow</span>
+                </div>
+                <div class="project-outcome">
+                    <i class="fas fa-check-circle highlight"></i> <strong>Outcome:</strong> Achieved 92% accuracy in detecting objects from the COCO dataset and implemented a custom model for specific object recognition.
+                </div>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="project-card">
+                <h3>SOC Homelab Environment</h3>
+                <p>Designed and deployed a fully functional Security Operations Center homelab to simulate real-world attacks and defense strategies.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Splunk</span>
+                    <span class="tech-badge">Sysmon</span>
+                    <span class="tech-badge">VirtualBox</span>
+                    <span class="tech-badge">Atomic Red Team</span>
+                </div>
+                <div class="project-outcome">
+                    <i class="fas fa-check-circle highlight"></i> <strong>Outcome:</strong> Successfully ingested telemetry data and created custom dashboards to visualize brute force and malware attacks.
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <h3>Adaptive WAF with Lightweight SIEM</h3>
+                <p>Developed a custom Web Application Firewall integrated with a lightweight SIEM solution to block SQLi and XSS attacks in real-time.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">SQL</span>
+                    <span class="tech-badge">Regex</span>
+                </div>
+                <div class="project-outcome">
+                    <i class="fas fa-check-circle highlight"></i> <strong>Outcome:</strong> Reduced false positives by 15% through adaptive rule-tuning and automated IP blocking.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & CTF -->
+    <section id="achievements">
+        <h2 class="section-title">05. Certs & CTF <span>// sudo ls /certs</span></h2>
+        <div class="achievements-container">
+            <div class="cert-item">
+                <i class="fas fa-certificate cert-icon"></i>
+                <div>
+                    <h4>Cyber Security & Digital Forensics</h4>
+                    <small>Certified by Cyber Secured India</small>
+                </div>
+            </div>
+            <div class="cert-item">
+                <i class="fas fa-user-secret cert-icon"></i>
+                <div>
+                    <h4>OSINT Certificate</h4>
+                    <small>Open Source Intelligence Investigation</small>
+                </div>
+            </div>
+            <div class="cert-item">
+                <i class="fas fa-code cert-icon"></i>
+                <div>
+                    <h4>Python & Flask Course</h4>
+                    <small>Full Stack Development Principles</small>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; border: 1px solid var(--neon-green); padding: 20px; background: #000;">
+            <h3 class="highlight">CTF Wall of Fame</h3>
+            <ul style="margin-top: 15px; list-style: none;">
+                <li><span class="cyan">>></span> 1st Place - ARCANE 2K25 (National)</li>
+                <li><span class="cyan">>></span> 2nd Place - TECHASTRA'25 (National)</li>
+                <li><span class="cyan">>></span> 3rd Place - ZERODAY CTF 2025 (Global)</li>
+                <li><span class="cyan">>></span> 3rd Place - Hackers Asylum CTF (National)</li>
+                <li><span class="cyan">>></span> Top 25 Finalist - H7CTF (National)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">06. Initialize Handshake <span>// connect</span></h2>
+        <div class="contact-container">
+            <p>Currently looking for Internship opportunities in SOC Analysis, Digital Forensics, or IT Security.</p>
+            <p class="highlight" style="margin-top: 20px; font-size: 1.2rem;">Let's secure the network together.</p>
+            
+            <div class="contact-links">
+                <a href="mailto:Ainz.Mhr@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/mhr-ainz" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/AinzAmour" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed by AinzAmour | Built with <HTML/CSS/JS></p>
+        <p style="opacity: 0.5; font-size: 0.7rem; margin-top: 5px;">System Status: ONLINE | Logs Cleared</p>
+        <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 5px; font-style: italic;">Hint: Type 'hack' or triple-click the logo...</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
