@@ -105,7 +105,7 @@ window.addEventListener('resize', () => {
 });
 
 // --- TYPEWRITER EFFECT ---
-const textToType = "Detect • Defend • Respond";
+const textToType = "Build • Defend • Break • Ship";
 const typeWriterElement = document.getElementById('typewriter');
 let i = 0;
 
