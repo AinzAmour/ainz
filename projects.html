@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flagship Projects Deep-Dive | Mohammed Habibur Rahman (Ainz)</title>
+    <meta name="description" content="Engineering deep-dives into NEXUS-HOMELAB (hardened container infrastructure & threat sandbox) and NEXUS-VMS (enterprise workplace visitor management system).">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            padding: 120px 10% 40px;
+            background: linear-gradient(180deg, rgba(0,243,255,0.05) 0%, rgba(5,5,5,0) 100%);
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .deepdive-section {
+            padding: 60px 10%;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .ci-badge-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .svg-diagram-card {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 25px 0;
+            overflow-x: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .config-code-block {
+            background: #030303;
+            border: 1px solid #222;
+            border-left: 4px solid var(--neon-green);
+            padding: 15px 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            overflow-x: auto;
+            border-radius: 4px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .config-code-block .comment { color: #6a9955; font-style: italic; }
+        .config-code-block .key { color: var(--neon-cyan); }
+        .config-code-block .val { color: var(--neon-green); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-cyan);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid #222;
+        }
+        .gallery-item-caption {
+            padding: 12px;
+            font-size: 0.85rem;
+            color: #bbb;
+        }
+        .pill-tag {
+            display: inline-block;
+            background: rgba(0,255,65,0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <canvas id="matrix-canvas"></canvas>
+    <div class="scanlines"></div>
+
+    <!-- Navigation -->
+    <nav aria-label="main navigation">
+        <a href="index.html" class="logo">AINZ<span class="cyan">.SPACE</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html#about">&larr; Back to Portfolio</a></li>
+            <li><a href="#nexus-homelab">NEXUS-HOMELAB</a></li>
+            <li><a href="#nexus-vms">NEXUS-VMS</a></li>
+            <li><a href="https://nexus-vpms.vercel.app" target="_blank" class="showcase-nav-link"><i class="fas fa-external-link-alt"></i> Live App ↗</a></li>
+        </ul>
+
+        <button class="hamburger" aria-expanded="false" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="index.html">&larr; Back to Portfolio</a></li>
+            <li><a href="#nexus-homelab">NEXUS-HOMELAB</a></li>
+            <li><a href="#nexus-vms">NEXUS-VMS</a></li>
+            <li><a href="https://nexus-vpms.vercel.app" target="_blank"><i class="fas fa-external-link-alt"></i> Live App ↗</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <span class="pill-tag">ENGINEERING DEEP-DIVES</span>
+        <h1 style="font-size: 2.8rem; margin-top: 10px; color: #fff;">Flagship Technical Architecture & Specs</h1>
+        <p style="color: #a0a0a0; max-width: 800px; margin-top: 10px; font-size: 1.1rem;">
+            In-depth architecture specifications, security controls, pre-rendered topology maps, and evidence of automated CI pipelines for flagship projects.
+        </p>
+    </header>
+
+    <!-- SECTION 1: NEXUS-HOMELAB -->
+    <section id="nexus-homelab" class="deepdive-section">
+        <div class="section-header-flex">
+            <div>
+                <span class="pill-tag">INFRASTRUCTURE & SECURITY</span>
+                <h2 style="font-size: 2.2rem; color: #fff; margin-top: 5px;">NEXUS-HOMELAB</h2>
+                <p style="color: var(--neon-cyan); font-size: 1rem;">Enterprise Hybrid Home Lab & Air-Gapped Cyber Threat Sandbox</p>
+            </div>
+            <div class="ci-badge-group">
+                <a href="https://github.com/AinzAmour/NEXUS-HOMELAB/actions" target="_blank">
+                    <img src="https://github.com/AinzAmour/NEXUS-HOMELAB/actions/workflows/ci.yml/badge.svg" alt="NEXUS-HOMELAB CI Passing">
+                </a>
+                <a href="https://github.com/AinzAmour/NEXUS-HOMELAB" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;"><i class="fab fa-github"></i> GitHub Source ↗</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 25px;">
+            <h3 style="color: #fff; margin-bottom: 12px;"><i class="fas fa-sitemap highlight"></i> Multi-Subnet Docker Network Topology</h3>
+            <p style="color: #ccc; font-size: 0.95rem;">
+                Architected with 5 discrete Docker bridge networks enforcing least-privilege network containment. Network traffic between enclaves is strictly controlled, and the cyber threat sandbox is air-gapped from host LAN.
+            </p>
+
+            <!-- Pre-rendered SVG Diagram -->
+            <div class="svg-diagram-card">
+                <svg viewBox="0 0 900 480" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Card -->
+                    <rect width="900" height="480" rx="8" fill="#070707" stroke="#222" stroke-width="1"/>
+                    
+                    <!-- Host Container Boundary -->
+                    <rect x="20" y="20" width="860" height="440" rx="6" fill="#0d0d0d" stroke="#333" stroke-width="1.5" stroke-dasharray="4 4"/>
+                    <text x="40" y="45" fill="#00ff41" font-family="Fira Code, monospace" font-size="14" font-weight="bold">Linux Hypervisor Node: nexus-homelab-node01 (Kernel 6.x)</text>
+
+                    <!-- Subnet 1: Ingress -->
+                    <rect x="40" y="70" width="390" height="110" rx="4" fill="#121212" stroke="#00f3ff" stroke-width="1"/>
+                    <text x="55" y="95" fill="#00f3ff" font-family="Fira Code, monospace" font-size="12" font-weight="bold">1. ingress-net (172.20.0.0/24)</text>
+                    <rect x="55" y="110" width="170" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="65" y="132" fill="#fff" font-family="Fira Code" font-size="11">Cloudflare Tunnel</text>
+                    <text x="65" y="148" fill="#888" font-family="Fira Code" font-size="9">Zero-Trust Ingress</text>
+
+                    <rect x="240" y="110" width="170" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="250" y="132" fill="#fff" font-family="Fira Code" font-size="11">Vaultwarden</text>
+                    <text x="250" y="148" fill="#888" font-family="Fira Code" font-size="9">Encrypted Vault</text>
+
+                    <!-- Subnet 2: Telemetry -->
+                    <rect x="460" y="70" width="400" height="110" rx="4" fill="#121212" stroke="#00ff41" stroke-width="1"/>
+                    <text x="475" y="95" fill="#00ff41" font-family="Fira Code, monospace" font-size="12" font-weight="bold">2. telemetry-net (172.21.0.0/24)</text>
+                    <rect x="475" y="110" width="115" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="485" y="132" fill="#fff" font-family="Fira Code" font-size="11">Prometheus</text>
+                    <text x="485" y="148" fill="#888" font-family="Fira Code" font-size="9">TSDB (:9090)</text>
+
+                    <rect x="600" y="110" width="115" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="610" y="132" fill="#fff" font-family="Fira Code" font-size="11">Grafana</text>
+                    <text x="610" y="148" fill="#888" font-family="Fira Code" font-size="9">HUD (:3001)</text>
+
+                    <rect x="725" y="110" width="120" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="735" y="132" fill="#fff" font-family="Fira Code" font-size="11">Node Exporter</text>
+                    <text x="735" y="148" fill="#888" font-family="Fira Code" font-size="9">Host Metrics</text>
+
+                    <!-- Subnet 3: AI Inference -->
+                    <rect x="40" y="200" width="390" height="110" rx="4" fill="#121212" stroke="#ff00a0" stroke-width="1"/>
+                    <text x="55" y="225" fill="#ff00a0" font-family="Fira Code, monospace" font-size="12" font-weight="bold">3. ai-inference-net (172.23.0.0/24)</text>
+                    <rect x="55" y="240" width="170" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="65" y="262" fill="#fff" font-family="Fira Code" font-size="11">Ollama Engine</text>
+                    <text x="65" y="278" fill="#888" font-family="Fira Code" font-size="9">Qwen / Llama / DeepSeek</text>
+
+                    <rect x="240" y="240" width="170" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="250" y="262" fill="#fff" font-family="Fira Code" font-size="11">Open WebUI</text>
+                    <text x="250" y="278" fill="#888" font-family="Fira Code" font-size="9">Local AI Client (:3000)</text>
+
+                    <!-- Subnet 4: Storage -->
+                    <rect x="460" y="200" width="400" height="110" rx="4" fill="#121212" stroke="#ffbd2e" stroke-width="1"/>
+                    <text x="475" y="225" fill="#ffbd2e" font-family="Fira Code, monospace" font-size="12" font-weight="bold">4. storage-net (172.24.0.0/24)</text>
+                    <rect x="475" y="240" width="115" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="485" y="262" fill="#fff" font-family="Fira Code" font-size="11">Samba SMB</text>
+                    <text x="485" y="278" fill="#888" font-family="Fira Code" font-size="9">POSIX ACL (:445)</text>
+
+                    <rect x="600" y="240" width="115" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="610" y="262" fill="#fff" font-family="Fira Code" font-size="11">Jellyfin</text>
+                    <text x="610" y="278" fill="#888" font-family="Fira Code" font-size="9">QSV Passthrough</text>
+
+                    <rect x="725" y="240" width="120" height="50" rx="4" fill="#1a1a1a" stroke="#444"/>
+                    <text x="735" y="262" fill="#fff" font-family="Fira Code" font-size="11">FileBrowser</text>
+                    <text x="735" y="278" fill="#888" font-family="Fira Code" font-size="9">Storage UI (:8080)</text>
+
+                    <!-- Subnet 5: AIR GAPPED Threat Sandbox -->
+                    <rect x="40" y="330" width="820" height="110" rx="4" fill="#150508" stroke="#ff003c" stroke-width="1.5"/>
+                    <text x="55" y="355" fill="#ff003c" font-family="Fira Code, monospace" font-size="13" font-weight="bold">5. cyber-sandbox-net (172.22.0.0/24) [AIR-GAPPED - internal: true]</text>
+
+                    <rect x="55" y="370" width="230" height="50" rx="4" fill="#200a0e" stroke="#ff003c"/>
+                    <text x="65" y="392" fill="#fff" font-family="Fira Code" font-size="11">DVWA (Vulnerable Web App)</text>
+                    <text x="65" y="408" fill="#ff7b94" font-family="Fira Code" font-size="9">Isolated Exploit Payload Testing</text>
+
+                    <rect x="305" y="370" width="230" height="50" rx="4" fill="#200a0e" stroke="#ff003c"/>
+                    <text x="315" y="392" fill="#fff" font-family="Fira Code" font-size="11">OWASP Juice Shop</text>
+                    <text x="315" y="408" fill="#ff7b94" font-family="Fira Code" font-size="9">Modern Web Vulnerability Lab</text>
+
+                    <rect x="555" y="370" width="290" height="50" rx="4" fill="#200a0e" stroke="#ff003c"/>
+                    <text x="565" y="392" fill="#fff" font-family="Fira Code" font-size="11">Wazuh SIEM Agent Telemetry</text>
+                    <text x="565" y="408" fill="#ff7b94" font-family="Fira Code" font-size="9">Zero LAN Cross-Talk Enforcement</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Hardening Specs -->
+        <div style="margin-top: 30px;">
+            <h3 style="color: #fff; margin-bottom: 12px;"><i class="fas fa-lock highlight"></i> Kernel Sysctl & SSH Security Hardening</h3>
+            <p style="color: #ccc; font-size: 0.95rem;">
+                Host operating system hardened aligned with CIS Level 1 and NIST SP 800-123 benchmarks:
+            </p>
+
+            <div class="config-code-block">
+                <div class="comment"># /etc/sysctl.d/99-homelab-security.conf</div>
+                <div class="comment"># Mitigate SYN Flood DoS Attacks</div>
+                <div><span class="key">net.ipv4.tcp_syncookies</span> = <span class="val">1</span></div>
+                <div><span class="key">net.ipv4.tcp_max_syn_backlog</span> = <span class="val">2048</span></div>
+                <br>
+                <div class="comment"># Drop Source-Routed Packets & ICMP Redirect Route Poisoning</div>
+                <div><span class="key">net.ipv4.conf.all.accept_source_route</span> = <span class="val">0</span></div>
+                <div><span class="key">net.ipv4.conf.all.accept_redirects</span> = <span class="val">0</span></div>
+                <div><span class="key">net.ipv4.conf.all.log_martians</span> = <span class="val">1</span></div>
+                <br>
+                <div class="comment"># Enable ASLR & Protect Symlinks/Hardlinks</div>
+                <div><span class="key">kernel.randomize_va_space</span> = <span class="val">2</span></div>
+                <div><span class="key">fs.protected_hardlinks</span> = <span class="val">1</span></div>
+                <div><span class="key">fs.protected_symlinks</span> = <span class="val">1</span></div>
+            </div>
+
+            <div class="config-code-block" style="border-left-color: var(--neon-cyan);">
+                <div class="comment"># /etc/ssh/sshd_config.d/hardening.conf</div>
+                <div><span class="key">Port</span> <span class="val">52222</span></div>
+                <div><span class="key">PermitRootLogin</span> <span class="val">no</span></div>
+                <div><span class="key">PasswordAuthentication</span> <span class="val">no</span></div>
+                <div><span class="key">PubkeyAuthentication</span> <span class="val">yes</span> <span class="comment"># ED25519 Keys Only</span></div>
+                <div><span class="key">Ciphers</span> <span class="val">chacha20-poly1305@openssh.com,aes256-gcm@openssh.com</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: NEXUS-VMS -->
+    <section id="nexus-vms" class="deepdive-section">
+        <div class="section-header-flex">
+            <div>
+                <span class="pill-tag">FULL-STACK & APPSEC</span>
+                <h2 style="font-size: 2.2rem; color: #fff; margin-top: 5px;">NEXUS-VMS</h2>
+                <p style="color: var(--neon-cyan); font-size: 1rem;">Enterprise Workplace Access & Visitor Management System</p>
+            </div>
+            <div class="ci-badge-group">
+                <a href="https://github.com/AinzAmour/NEXUS-VMS/actions" target="_blank">
+                    <img src="https://github.com/AinzAmour/NEXUS-VMS/actions/workflows/ci.yml/badge.svg" alt="NEXUS-VMS CI Passing">
+                </a>
+                <a href="https://nexus-vpms.vercel.app" target="_blank" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.85rem;"><i class="fas fa-external-link-alt"></i> Launch Live App ↗</a>
+                <a href="https://github.com/AinzAmour/NEXUS-VMS" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;"><i class="fab fa-github"></i> GitHub Source ↗</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 25px;">
+            <h3 style="color: #fff; margin-bottom: 12px;"><i class="fas fa-diagram-project highlight"></i> Full-Stack System Architecture</h3>
+            <p style="color: #ccc; font-size: 0.95rem;">
+                Architected with React 18, Vite, Node.js, Express, and MongoDB Atlas. Enforces multi-role RBAC (Admin, Receptionist, Host) and a strict lifecycle state machine:
+            </p>
+
+            <!-- Pre-rendered Architecture SVG -->
+            <div class="svg-diagram-card">
+                <svg viewBox="0 0 900 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="900" height="360" rx="8" fill="#070707" stroke="#222" stroke-width="1"/>
+                    
+                    <!-- React Frontend -->
+                    <rect x="40" y="50" width="220" height="260" rx="6" fill="#0f172a" stroke="#00f3ff" stroke-width="1.5"/>
+                    <text x="60" y="80" fill="#00f3ff" font-family="Fira Code" font-size="14" font-weight="bold">React 18 Frontend</text>
+                    <text x="60" y="100" fill="#888" font-family="Fira Code" font-size="10">Deployed on Vercel Edge</text>
+
+                    <rect x="55" y="120" width="190" height="40" rx="4" fill="#1e293b" stroke="#334155"/>
+                    <text x="65" y="144" fill="#fff" font-family="Fira Code" font-size="11">Command Palette (Cmd+K)</text>
+
+                    <rect x="55" y="170" width="190" height="40" rx="4" fill="#1e293b" stroke="#334155"/>
+                    <text x="65" y="194" fill="#fff" font-family="Fira Code" font-size="11">Printable Thermal Badge Slip</text>
+
+                    <rect x="55" y="220" width="190" height="40" rx="4" fill="#1e293b" stroke="#334155"/>
+                    <text x="65" y="244" fill="#fff" font-family="Fira Code" font-size="11">Role-Based Router Context</text>
+
+                    <!-- Connection Arrow 1 -->
+                    <path d="M 260 180 L 340 180" stroke="#00ff41" stroke-width="2" marker-end="url(#arrow)"/>
+                    <text x="270" y="170" fill="#00ff41" font-family="Fira Code" font-size="10">REST / Bearer JWT</text>
+
+                    <!-- Express Backend API -->
+                    <rect x="340" y="50" width="240" height="260" rx="6" fill="#051f15" stroke="#00ff41" stroke-width="1.5"/>
+                    <text x="360" y="80" fill="#00ff41" font-family="Fira Code" font-size="14" font-weight="bold">Express API Engine</text>
+                    <text x="360" y="100" fill="#888" font-family="Fira Code" font-size="10">Node.js (Render Cloud)</text>
+
+                    <rect x="355" y="120" width="210" height="35" rx="4" fill="#0a3322" stroke="#165b3d"/>
+                    <text x="365" y="142" fill="#fff" font-family="Fira Code" font-size="10">Helmet HTTP Security Headers</text>
+
+                    <rect x="355" y="165" width="210" height="35" rx="4" fill="#0a3322" stroke="#165b3d"/>
+                    <text x="365" y="187" fill="#fff" font-family="Fira Code" font-size="10">Rate-Limiter & Auth Throttling</text>
+
+                    <rect x="355" y="210" width="210" height="35" rx="4" fill="#0a3322" stroke="#165b3d"/>
+                    <text x="365" y="232" fill="#fff" font-family="Fira Code" font-size="10">Visitor State Validation Machine</text>
+
+                    <rect x="355" y="255" width="210" height="35" rx="4" fill="#0a3322" stroke="#165b3d"/>
+                    <text x="365" y="277" fill="#fff" font-family="Fira Code" font-size="10">Node Native Test Runner (12/12)</text>
+
+                    <!-- Connection Arrow 2 -->
+                    <path d="M 580 180 L 660 180" stroke="#00f3ff" stroke-width="2"/>
+
+                    <!-- Database -->
+                    <rect x="660" y="50" width="200" height="260" rx="6" fill="#1c1917" stroke="#ffbd2e" stroke-width="1.5"/>
+                    <text x="680" y="80" fill="#ffbd2e" font-family="Fira Code" font-size="14" font-weight="bold">MongoDB Atlas</text>
+                    <text x="680" y="100" fill="#888" font-family="Fira Code" font-size="10">Mongoose Scoped ODM</text>
+
+                    <rect x="675" y="130" width="170" height="45" rx="4" fill="#292524" stroke="#44403c"/>
+                    <text x="685" y="152" fill="#fff" font-family="Fira Code" font-size="11">Visitors Collection</text>
+                    <text x="685" y="166" fill="#888" font-family="Fira Code" font-size="9">Strict State Enum</text>
+
+                    <rect x="675" y="190" width="170" height="45" rx="4" fill="#292524" stroke="#44403c"/>
+                    <text x="685" y="212" fill="#fff" font-family="Fira Code" font-size="11">Audit Logs</text>
+                    <text x="685" y="226" fill="#888" font-family="Fira Code" font-size="9">Immutable Transition History</text>
+
+                    <rect x="675" y="250" width="170" height="45" rx="4" fill="#292524" stroke="#44403c"/>
+                    <text x="685" y="272" fill="#fff" font-family="Fira Code" font-size="11">Users & Employees</text>
+                    <text x="685" y="286" fill="#888" font-family="Fira Code" font-size="9">Bcrypt Hash Storage</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- High Resolution Screenshots Gallery -->
+        <div style="margin-top: 35px;">
+            <h3 style="color: #fff; margin-bottom: 12px;"><i class="fas fa-images highlight"></i> Production UI Screenshot Gallery</h3>
+            <p style="color: #ccc; font-size: 0.95rem;">
+                Verified production user interfaces captured directly from the running web application:
+            </p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="screenshots/desktop/02-admin-dashboard.png" alt="NEXUS-VMS Admin Dashboard" loading="lazy">
+                    <div class="gallery-item-caption"><strong>Admin Dashboard:</strong> Real-time facility metrics, visitor state counts, and capacity utilization.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="screenshots/desktop/06-visitor-registration.png" alt="NEXUS-VMS Visitor Registration" loading="lazy">
+                    <div class="gallery-item-caption"><strong>Visitor Registration:</strong> Real-time validation checking duplicate same-day bookings.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="screenshots/desktop/07-visitor-badge-modal.png" alt="NEXUS-VMS Security Badge Modal" loading="lazy">
+                    <div class="gallery-item-caption"><strong>Security Badge Modal:</strong> Printable thermal security pass badge generation.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="screenshots/desktop/08-employee-dashboard.png" alt="NEXUS-VMS Host Portal" loading="lazy">
+                    <div class="gallery-item-caption"><strong>Host Employee Portal:</strong> Scoped approval interface for incoming guests.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed & Engineered by <strong>Mohammed Habibur Rahman (Ainz)</strong> &bull; Deployed at <a href="index.html" class="highlight">ainz.space</a></p>
+        <p style="opacity: 0.7; font-size: 0.8rem; margin-top: 5px;">
+            <a href="index.html" class="cyan">&larr; Return to Portfolio Home</a>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
